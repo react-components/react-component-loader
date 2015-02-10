@@ -5,6 +5,7 @@ var path = require('path');
 module.exports = function() {};
 
 module.exports.pitch = function(remainingRequest) {
+  if (~(this.resourceQuery || '').indexOf('force-load')) return 'module.exports = require(' + JSON.stringify('!!' + remainingRequest) + ');';
   this.cacheable && this.cacheable();
   var cb = this.async();
 
